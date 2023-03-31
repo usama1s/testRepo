@@ -744,7 +744,7 @@ class wtwadmin {
 
 			$zpagedata .= "					<div class='wtw-clear'></div>\r\n";
 			$zpagedata .= "					<div id='wtw_serversettingscomplete'></div><br />\r\n";
-			$zpagedata .= "					<div id='wtw_loadingserversettings' class='wtw-loadingnoticecentered'>Loading</div>\r\n";
+			$zpagedata .= "					<div id='wtw_loadingserversettings' class='wtw-loadingnoticecentered'> <div></div><div></div><div></div> </div>\r\n";
 			$zpagedata .= "					<div class='wtw-clear'></div>\r\n";
 			$zpagedata .= "					<div class='wtw-greenmenubutton' onclick='WTW.saveServerSettings();'>Save Server Settings</div>\r\n";
 			$zpagedata .= "				</div>\r\n";
@@ -784,7 +784,7 @@ class wtwadmin {
 			$zpagedata .= "					<div class='wtw-dashboardvalue'><input type='text' id='wtw_tfromemailname' maxlength='255' /></div>\r\n";
 			$zpagedata .= "					<div class='wtw-clear'></div>\r\n";
 			$zpagedata .= "					<div id='wtw_emailservercomplete'></div><br />\r\n";
-			$zpagedata .= "					<div id='wtw_loadingemailserver' class='wtw-loadingnoticecentered'>Loading...</div>\r\n";
+			$zpagedata .= "					<div id='wtw_loadingemailserver' class='wtw-loadingnoticecentered'> <div></div><div></div><div></div> </div>\r\n";
 			$zpagedata .= "					<div class='wtw-clear'></div>\r\n";
 			$zpagedata .= "					<div class='wtw-greenmenubutton' onclick='WTW.saveEmailServerSettings();'>Save Settings</div>\r\n";
 			$zpagedata .= "					<div class='wtw-clear'></div><hr />\r\n";
@@ -894,7 +894,7 @@ class wtwadmin {
 			$zpagedata .= "						<div id='wtw_webdomainlist' class='wtw-whitebg'></div><br />\r\n";
 			$zpagedata .= " 				</div>\r\n";
 			$zpagedata .= "					<div id='wtw_webdomaincomplete'></div><br />\r\n";
-			$zpagedata .= "					<div id='wtw_loadingwebdomain' class='wtw-loadingnoticecentered'>Loading...</div>\r\n";
+			$zpagedata .= "					<div id='wtw_loadingwebdomain' class='wtw-loadingnoticecentered'> <div></div><div></div><div></div> </div>\r\n";
 			$zpagedata .= "					<div class='wtw-clear'></div>\r\n";
 			$zpagedata .= "				</div>\r\n";
 			$zpagedata .= "			</div>\r\n";
@@ -988,7 +988,7 @@ class wtwadmin {
 			$zpagedata .= "						<div id='wtw_webaliaslist' class='wtw-whitebg'></div><br />\r\n";
 			$zpagedata .= " 				</div>\r\n";
 			$zpagedata .= "					<div id='wtw_webaliascomplete'></div><br />\r\n";
-			$zpagedata .= "					<div id='wtw_loadingwebalias' class='wtw-loadingnoticecentered'>Loading...</div>\r\n";
+			$zpagedata .= "					<div id='wtw_loadingwebalias' class='wtw-loadingnoticecentered'> <div></div><div></div><div></div> </div>\r\n";
 			$zpagedata .= "					<div class='wtw-clear'></div>\r\n";
 			$zpagedata .= "				</div>\r\n";
 			$zpagedata .= "			</div>\r\n";
@@ -1036,7 +1036,7 @@ class wtwadmin {
 			$zpagedata .= "						<div id='wtw_apikeystitle' class='wtw-dashboardboxtitle'>API Keys</div>\r\n";
 			$zpagedata .= "						<div id='wtw_apikeyslist'></div><br />\r\n";
 			$zpagedata .= " 					</div>\r\n";
-			$zpagedata .= "					<div id='wtw_loadingapikeys' class='wtw-loadingnoticecentered'>Loading...</div>\r\n";
+			$zpagedata .= "					<div id='wtw_loadingapikeys' class='wtw-loadingnoticecentered'> <div></div><div></div><div></div> </div>\r\n";
 			$zpagedata .= "					<div class='wtw-clear'></div>\r\n";
 			$zpagedata .= "				</div>\r\n";
 			$zpagedata .= "			</div>\r\n";
@@ -1052,7 +1052,7 @@ class wtwadmin {
 			$zpagedata .= "			<div class='wtw-dashboardbox'>\r\n";
 			$zpagedata .= "				<div id='wtw_optionallist'></div><br />\r\n";
 			$zpagedata .= "				<div class='wtw-clear'></div>\r\n";
-			$zpagedata .= "				<div id='wtw_loadingoptional' class='wtw-loadingnoticecentered'>Loading...</div>\r\n";
+			$zpagedata .= "				<div id='wtw_loadingoptional' class='wtw-loadingnoticecentered'> <div></div><div></div><div></div> </div>\r\n";
 			$zpagedata .= "				<div class='wtw-clear'></div>\r\n";
 			$zpagedata .= "			</div>\r\n";
 			$zpagedata .= "		</div>\r\n";
@@ -1067,7 +1067,7 @@ class wtwadmin {
 			$zpagedata .= "			<div class='wtw-dashboardbox'>\r\n";
 			$zpagedata .= "				<div id='wtw_invoiceslist'></div><br />\r\n";
 			$zpagedata .= "				<div class='wtw-clear'></div>\r\n";
-			$zpagedata .= "				<div id='wtw_loadinginvoices' class='wtw-loadingnoticecentered'>Loading...</div>\r\n";
+			$zpagedata .= "				<div id='wtw_loadinginvoices' class='wtw-loadingnoticecentered'> <div></div><div></div><div></div> </div>\r\n";
 			$zpagedata .= "				<div class='wtw-clear'></div>\r\n";
 			$zpagedata .= "			</div>\r\n";
 			$zpagedata .= "		</div>\r\n";

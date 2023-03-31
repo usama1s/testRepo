@@ -290,14 +290,14 @@ WTWJS.prototype.setThingsListTab = async function(zfilter) {
 		}
 		if (zfilter == 'all' && WTW.isUserInRole('admin')) {
 			if (dGet('wtw_thingbuttonmine') != null) {
-				dGet('wtw_thingbuttonmine').className = 'wtw-localbutton wtw-leftradius';
-				dGet('wtw_thingbuttonall').className = 'wtw-localbuttonselected wtw-rightradius';
+				dGet('wtw_thingbuttonmine').className = 'tab-button';
+				dGet('wtw_thingbuttonall').className = 'tab-button active';
 			}
 		} else {
 			zfilter = 'mine';
 			if (dGet('wtw_thingbuttonmine') != null) {
-				dGet('wtw_thingbuttonmine').className = 'wtw-localbuttonselected wtw-leftradius';
-				dGet('wtw_thingbuttonall').className = 'wtw-localbutton wtw-rightradius';
+				dGet('wtw_thingbuttonmine').className = 'tab-button active';
+				dGet('wtw_thingbuttonall').className = 'tab-button';
 			}
 		}
 		WTW.getSelectThingsList(zfilter);
@@ -316,15 +316,15 @@ WTWJS.prototype.getSelectThingsList = async function(zfilter) {
 		WTW.show('wtw_loadingthingid');
 		var zlistthings = '';
 		if (WTW.isUserInRole('admin') || WTW.isUserInRole('developer') || WTW.isUserInRole('architect') || WTW.isUserInRole('graphic artist')) {
-			zlistthings = "<div class='wtw-localbuttonleftpad'></div><div id='wtw_thingbuttonmine' class='wtw-localbutton";
+			zlistthings = "<div class='tab-buttons'><div id='wtw_thingbuttonmine' class='tab-button ";
 			if (zfilter == 'mine') {
-				zlistthings += "selected";
+				zlistthings += "active";
 			}
-			zlistthings += " wtw-leftradius' onclick=\"WTW.setThingsListTab('mine');\">Mine</div><div class='wtw-localbuttonmiddlepad'> or </div><div id='wtw_thingbuttonall' class='wtw-localbutton";
+			zlistthings += " ' onclick=\"WTW.setThingsListTab('mine');\">Mine</div><div id='wtw_thingbuttonall' class='tab-button ";
 			if (zfilter == 'all') {
-				zlistthings += "selected";
+				zlistthings += "active";
 			}
-			zlistthings += " wtw-rightradius' onclick=\"WTW.setThingsListTab('all');\">All</div><div class='wtw-localbuttonrightpad'></div><div class='wtw-clear'></div>\r\n";
+			zlistthings += " ' onclick=\"WTW.setThingsListTab('all');\">All</div></div>";
 		} else {
 			zlistthings = '<br /><br />';
 		}
@@ -353,9 +353,9 @@ WTWJS.prototype.getSelectThingsList = async function(zfilter) {
 									}
 								}
 								if (WTW.things[i].thinginfo.thingid == thingid) {
-									dGet('wtw_listthings').innerHTML += "<div id='wtw_beditweb-" + WTW.things[i].thinginfo.thingid + "' class='wtw-menulevel2' style='background-color:#2C2CAB;'><div style='float:right;color:#afafaf;'>" + zversion + "</div>" + WTW.decode(WTW.things[i].thinginfo.thingname) + "</div>\r\n";
+									dGet('wtw_listthings').innerHTML += "<div id='wtw_beditweb-" + WTW.things[i].thinginfo.thingid + "' class='wtw-menulevel2' style='background-color:#2C2CAB;'> <p>" + WTW.decode(WTW.things[i].thinginfo.thingname) + "</p><span>" + zversion + "</span></div>\r\n";
 								} else {
-									dGet("wtw_listthings").innerHTML += "<div id='wtw_beditweb-" + WTW.things[i].thinginfo.thingid + "' onclick=\"window.location.href='admin.php?thingid=" + WTW.things[i].thinginfo.thingid + "';\" class='wtw-menulevel2'><div style='float:right;color:#afafaf;'>" + zversion + "</div>" + WTW.decode(WTW.things[i].thinginfo.thingname) + "</div>\r\n";
+									dGet("wtw_listthings").innerHTML += "<div id='wtw_beditweb-" + WTW.things[i].thinginfo.thingid + "' onclick=\"window.location.href='admin.php?thingid=" + WTW.things[i].thinginfo.thingid + "';\" class='wtw-menulevel2'><p>" + WTW.decode(WTW.things[i].thinginfo.thingname) + "</p><span>" + zversion + "</span></div>\r\n";
 								}
 							}
 						}

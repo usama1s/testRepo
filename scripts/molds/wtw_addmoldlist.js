@@ -39,11 +39,11 @@ WTWJS.prototype.getMoldList = function() {
 				zoption.text = WTW.moldList[i];
 				zoption.value = zmoldvalue;
 				if (buildingid != '') {
-					dGet('wtw_moldsbuttonlist').innerHTML += "<div id='wtw_baddbuild" + zmoldvalue + "' name='wtw_baddbuild" + zmoldvalue + "' onclick=\"WTW.openAddNewMold('building','" + zmoldvalue + "');\" class='wtw-menulevel2'>" + WTW.moldList[i] + "</div>\r\n";
+					dGet('wtw_moldsbuttonlist').innerHTML += "<div id='wtw_baddbuild" + zmoldvalue + "' name='wtw_baddbuild" + zmoldvalue + "' onclick=\"WTW.openAddNewMold('building','" + zmoldvalue + "');\" class='wtw-menulevel2'><p>" + WTW.moldList[i] + "</p></div>";
 				} else if (communityid != '') {
-					dGet('wtw_moldsbuttonlist').innerHTML += "<div id='wtw_baddcomm" + zmoldvalue + "' name='wtw_baddcomm" + zmoldvalue + "' onclick=\"WTW.openAddNewMold('community','" + zmoldvalue + "');\" class='wtw-menulevel2'>" + WTW.moldList[i] + "</div>\r\n";
+					dGet('wtw_moldsbuttonlist').innerHTML += "<div id='wtw_baddcomm" + zmoldvalue + "' name='wtw_baddcomm" + zmoldvalue + "' onclick=\"WTW.openAddNewMold('community','" + zmoldvalue + "');\" class='wtw-menulevel2'><p>" + WTW.moldList[i] + "</p></div>";
 				} else if (thingid != '') {
-					dGet('wtw_moldsbuttonlist').innerHTML += "<div id='wtw_baddthing" + zmoldvalue + "' name='wtw_baddthing" + zmoldvalue + "' onclick=\"WTW.openAddNewMold('thing','" + zmoldvalue + "');\" class='wtw-menulevel2'>" + WTW.moldList[i] + "</div>\r\n";
+					dGet('wtw_moldsbuttonlist').innerHTML += "<div id='wtw_baddthing" + zmoldvalue + "' name='wtw_baddthing" + zmoldvalue + "' onclick=\"WTW.openAddNewMold('thing','" + zmoldvalue + "');\" class='wtw-menulevel2'><p>" + WTW.moldList[i] + "</p></div>";
 				}
 			}
 		}
@@ -87,11 +87,11 @@ WTWJS.prototype.getWebMoldList = function() {
 					zmoldvalue = zmoldvalue.replace(' ','');
 				}
 				if (buildingid != '') {
-					dGet('wtw_webmoldsbuttonlist').innerHTML += "<div id='wtw_baddweb" + zmoldvalue + "' name='wtw_baddweb" + zmoldvalue + "' onclick=\"WTW.openAddNewMold('building','" + zmoldvalue + "');\" class='wtw-menulevel2'>" + zwebmoldlist[i] + "</div>\r\n";
+					dGet('wtw_webmoldsbuttonlist').innerHTML += "<div id='wtw_baddweb" + zmoldvalue + "' name='wtw_baddweb" + zmoldvalue + "' onclick=\"WTW.openAddNewMold('building','" + zmoldvalue + "');\" class='wtw-menulevel2'><p>" + zwebmoldlist[i] + "</p></div>\r\n";
 				} else if (communityid != '') {
-					dGet('wtw_webmoldsbuttonlist').innerHTML += "<div id='wtw_baddcommweb" + zmoldvalue + "' name='wtw_baddcommweb" + zmoldvalue + "' onclick=\"WTW.openAddNewMold('community','" + zmoldvalue + "');\" class='wtw-menulevel2'>" + zwebmoldlist[i] + "</div>\r\n";
+					dGet('wtw_webmoldsbuttonlist').innerHTML += "<div id='wtw_baddcommweb" + zmoldvalue + "' name='wtw_baddcommweb" + zmoldvalue + "' onclick=\"WTW.openAddNewMold('community','" + zmoldvalue + "');\" class='wtw-menulevel2'><p>" + zwebmoldlist[i] + "</p></div>\r\n";
 				} else if (thingid != '') {
-					dGet('wtw_webmoldsbuttonlist').innerHTML += "<div id='wtw_baddthingweb" + zmoldvalue + "' name='wtw_baddthingweb" + zmoldvalue + "' onclick=\"WTW.openAddNewMold('thing','" + zmoldvalue + "');\" class='wtw-menulevel2'>" + zwebmoldlist[i] + "</div>\r\n";
+					dGet('wtw_webmoldsbuttonlist').innerHTML += "<div id='wtw_baddthingweb" + zmoldvalue + "' name='wtw_baddthingweb" + zmoldvalue + "' onclick=\"WTW.openAddNewMold('thing','" + zmoldvalue + "');\" class='wtw-menulevel2'><p>" + zwebmoldlist[i] + "</p></div>\r\n";
 				}
 			}
 		}

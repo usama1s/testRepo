@@ -12,14 +12,14 @@ WTWJS.prototype.setAvatarsListTab = async function(zfilter) {
 		}
 		if (zfilter == 'all' && WTW.isUserInRole('admin')) {
 			if (dGet('wtw_avatarbuttonmine') != null) {
-				dGet('wtw_avatarbuttonmine').className = 'wtw-localbutton wtw-leftradius';
-				dGet('wtw_avatarbuttonall').className = 'wtw-localbuttonselected wtw-rightradius';
+				dGet('wtw_avatarbuttonmine').className = 'tab-button';
+				dGet('wtw_avatarbuttonall').className = 'tab-button active';
 			}
 		} else {
 			zfilter = 'mine';
 			if (dGet('wtw_avatarbuttonmine') != null) {
-				dGet('wtw_avatarbuttonmine').className = 'wtw-localbuttonselected wtw-leftradius';
-				dGet('wtw_avatarbuttonall').className = 'wtw-localbutton wtw-rightradius';
+				dGet('wtw_avatarbuttonmine').className = 'tab-button active';
+				dGet('wtw_avatarbuttonall').className = 'tab-button';
 			}
 		}
 		WTW.openSelectAvatar(zfilter);
@@ -38,15 +38,15 @@ WTWJS.prototype.openSelectAvatar = function(zfilter) {
 		WTW.show('wtw_loadingavatarid');
 		var zlistavatars = '';
 		if (WTW.isUserInRole('admin') || WTW.isUserInRole('developer') || WTW.isUserInRole('architect') || WTW.isUserInRole('graphic artist')) {
-			zlistavatars = "<div class='wtw-localbuttonleftpad'></div><div id='wtw_avatarbuttonmine' class='wtw-localbutton";
+			zlistavatars = "<div class='tab-buttons'><div id='wtw_avatarbuttonmine' class='tab-button ";
 			if (zfilter == 'mine') {
-				zlistavatars += "selected";
+				zlistavatars += "active";
 			}
-			zlistavatars += " wtw-leftradius' onclick=\"WTW.setAvatarsListTab('mine');\">Mine</div><div class='wtw-localbuttonmiddlepad'> or </div><div id='wtw_avatarbuttonall' class='wtw-localbutton";
+			zlistavatars += " ' onclick=\"WTW.setAvatarsListTab('mine');\">Mine</div><div id='wtw_avatarbuttonall' class='tab-button ";
 			if (zfilter == 'all') {
-				zlistavatars += "selected";
+				zlistavatars += "active";
 			}
-			zlistavatars += " wtw-rightradius' onclick=\"WTW.setAvatarsListTab('all');\">All</div><div class='wtw-localbuttonrightpad'></div><div class='wtw-clear'></div>\r\n";
+			zlistavatars += " ' onclick=\"WTW.setAvatarsListTab('all');\">All</div></div>";
 		} else {
 			zlistavatars = '<br /><br />';
 		}
@@ -54,6 +54,7 @@ WTWJS.prototype.openSelectAvatar = function(zfilter) {
 		WTW.getAsyncJSON('/connect/avatars.php?filter=' + zfilter, 
 			function(zresponse) {
 				zresponse = JSON.parse(zresponse);
+				console.log(zresponse);
 				if (zresponse.avatars != null) {
 					var zavatargroup = '';
 					var zhostid = '';
@@ -89,9 +90,9 @@ WTWJS.prototype.openSelectAvatar = function(zfilter) {
 								zavatargroup = zresponse.avatars[i].avatargroup;
 							}
 							if (zresponse.avatars[i].avatarid == avatarid) {
-								dGet('wtw_listavatars').innerHTML += "<div id='wtw_beditavatar-" + zresponse.avatars[i].avatarid + "' class='wtw-menulevel2' style='background-color:#2C2CAB;'><div style='float:right;color:#afafaf;'>" + zversion + "</div>" + WTW.decode(zresponse.avatars[i].displayname) + "</div>\r\n";
+								dGet('wtw_listavatars').innerHTML += "<div id='wtw_beditavatar-" + zresponse.avatars[i].avatarid + "' class='wtw-menulevel2' > <p>" + WTW.decode(zresponse.avatars[i].displayname) + "</p><span>" + zversion + "</span></div>\r\n";
 							} else {
-								dGet("wtw_listavatars").innerHTML += "<div id='wtw_beditavatar-" + zresponse.avatars[i].avatarid + "' onclick=\"window.location.href='admin.php?avatarid=" + zresponse.avatars[i].avatarid + "';\" class='wtw-menulevel2'><div style='float:right;color:#afafaf;'>" + zversion + "</div>" + WTW.decode(zresponse.avatars[i].displayname) + "</div>\r\n";
+								dGet("wtw_listavatars").innerHTML += "<div id='wtw_beditavatar-" + zresponse.avatars[i].avatarid + "' onclick=\"window.location.href='admin.php?avatarid=" + zresponse.avatars[i].avatarid + "';\" class='wtw-menulevel2'><p>" + WTW.decode(zresponse.avatars[i].displayname) + "</p><span>" + zversion + "</span></div>\r\n";
 							}
 						}
 					}
@@ -152,7 +153,7 @@ WTWJS.prototype.closeSelectAvatar = function() {
 	try {
 		WTW.hideAdminMenu();
 		WTW.hide('wtw_adminSelectAvatarDiv');
-		WTW.adminMenuItemSelected(dGet('wtw_bbackwtw_adminSelectAvatarDiv'));
+		WTW.adminMenuItemSelected(dGet('wtw_bback wtw_adminSelectAvatarDiv'));
 	} catch (ex) {
 		WTW.log('core-scripts-admin-wtw_adminavatars.js-closeSelectAvatar=' + ex.message);
 	} 

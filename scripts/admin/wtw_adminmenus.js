@@ -9,12 +9,14 @@ WTWJS.prototype.toggleAdminMenu = function(zbuttonid) {
 			dGet(zbuttonid).style.left = '0px';
 		}
 		if (dGet(zbuttonid).style.left == '0px') {
+			dGet(zbuttonid).classList.remove("closed");
 			var x = 0;
 			var zmenutimer = window.setInterval(function() {
 				if (x < 325) {
 					dGet(zbuttonid).style.left = x + 'px';
 					x += 40;
 				} else {
+				
 					dGet(zbuttonid).style.left = '315px';
 					dGet(zbuttonid.replace('button','')).style.left = '0px';
 					dGet(zbuttonid.replace('button','') + 'left').style.visibility = 'visible';
@@ -26,6 +28,7 @@ WTWJS.prototype.toggleAdminMenu = function(zbuttonid) {
 				WTW.setWindowSize();
 			},1);
 		} else {
+			dGet(zbuttonid).classList.add("closed");
 			WTW.hide(zbuttonid.replace('button',''));
 			var x = 325;
 			var zmenutimer = window.setInterval(function() {
@@ -45,7 +48,8 @@ WTWJS.prototype.toggleAdminMenu = function(zbuttonid) {
 		}
 		if (dGet('wtw_adminmenu1').style.display != 'none') {
 			if (communityid != '') {
-				WTW.show('wtw_admincommunitiesdiv');
+				// WTW.show('wtw_admincommunitiesdiv');
+				document.getElementById('wtw_admincommunitiesdiv').classList.add("active");
 				WTW.show('wtw_adminsettingscommunity');
 				WTW.show('wtw_admineditcommunity');
 			} else {
@@ -53,7 +57,8 @@ WTWJS.prototype.toggleAdminMenu = function(zbuttonid) {
 				WTW.hide('wtw_admineditcommunity');
 			}
 			if (buildingid != '') {
-				WTW.show('wtw_adminbuildingsdiv');
+				// WTW.show('wtw_adminbuildingsdiv');
+				document.getElementById('wtw_adminbuildingsdiv').classList.add("active");
 				WTW.show('wtw_adminsettingsbuilding');
 				WTW.show('wtw_admineditbuilding');
 			} else {
@@ -61,7 +66,8 @@ WTWJS.prototype.toggleAdminMenu = function(zbuttonid) {
 				WTW.hide('wtw_admineditbuilding');
 			}
 			if (thingid != '') {
-				WTW.show('wtw_adminthingsdiv');
+				// WTW.show('wtw_adminthingsdiv');
+				document.getElementById('wtw_adminthingsdiv').classList.add("active");
 				WTW.show('wtw_adminsettingsthing');
 				WTW.show('wtw_admineditthing');
 			} else {
@@ -843,11 +849,14 @@ WTWJS.prototype.adminMenuItemSelected = function(zobj) {
 						WTW.hideAdminMenu();
 						WTW.show('wtw_adminmenu1');
 						if (communityid != '') {
-							WTW.show('wtw_admincommunitiesdiv');
+							// WTW.show('wtw_admincommunitiesdiv');
+							document.getElementById('wtw_admincommunitiesdiv').classList.add("active");
 						} else if (buildingid != '') {
-							WTW.show('wtw_adminbuildingsdiv');
+							// WTW.show('wtw_adminbuildingsdiv');
+							document.getElementById('wtw_adminbuildingsdiv').classList.add("active");
 						} else if (thingid != '') {
-							WTW.show('wtw_adminthingsdiv');
+							// WTW.show('wtw_adminthingsdiv');
+							document.getElementById('wtw_adminthingsdiv').classList.add("active");
 						}
 						break;
 					case 'wtw_admincloseproject':
@@ -913,20 +922,30 @@ WTWJS.prototype.adminOpenSubmenu = function(zobj) {
 		WTW.hide('wtw_fullpageform');
 		var zobjid = zobj.id+'div';
 		var zmenusubdivs = document.getElementsByClassName('wtw-adminmenudiv');
+		var zmenusub = document.getElementsByClassName('wtw-adminmenu');
 		for (var i = 0;i < zmenusubdivs.length;i++) {
 			if (zmenusubdivs[i] != null) {
 				if (zmenusubdivs[i].id != undefined) {
 					if (zmenusubdivs[i].id != zobjid) {
-						WTW.hide(zmenusubdivs[i].id);
+						// WTW.hide(zmenusubdivs[i].id);
+						console.log(zmenusub[i]);
+						document.getElementById(zmenusubdivs[i].id).classList.remove("active");
+						zmenusub[i].classList.remove("active");
 					}
 				}
 			}
 		}
 		if (dGet(zobjid) != null) {
-			if (dGet(zobjid).style.display == 'none') {
-				WTW.show(zobjid);
+			console.log(zobjid);
+			// if (dGet(zobjid).style.display == 'none') {
+			if (!document.getElementById(zobjid).classList.contains('active')) {
+				// WTW.show(zobjid);
+				document.getElementById(zobjid).classList.add("active");
+				document.getElementById(zobj.id).classList.add("active");
 			} else {
-				WTW.hide(zobjid);
+				// WTW.hide(zobjid);
+				document.getElementById(zobjid).classList.remove("active");
+				document.getElementById(zobj.id).classList.remove("active");
 			}
 		}
 	} catch (ex) {
@@ -967,6 +986,7 @@ WTWJS.prototype.toggleDashboardBox = function(zelementname) {
 
 WTWJS.prototype.toggleAdminSubMenu = function(zobj) {
 	/* open and close Menu - Submenu */
+					console.log("yes id : " + zobj.id);
 	try {
 		switch (zobj.id) {
 			case 'wtw_admindashboard':
@@ -992,14 +1012,18 @@ WTWJS.prototype.toggleAdminSubMenu = function(zobj) {
 						zopen = true;
 					}
 				}
-				if ((dGet('wtw_selectimagepage').style.display == 'none' || dGet('wtw_selectimagepage').style.display == '') && (dGet('wtw_admincommunitiesdiv').style.display == 'none' || dGet('wtw_admincommunitiesdiv').style.display == '') && (dGet('wtw_adminbuildingsdiv').style.display == 'none' || dGet('wtw_adminbuildingsdiv').style.display == '') && (dGet('wtw_adminthingsdiv').style.display == 'none' || dGet('wtw_adminthingsdiv').style.display == '') && zopen == false) {
-					WTW.openFullPageForm('medialibrary','');WTW.setImageMenu(4);
+				// if ((dGet('wtw_selectimagepage').style.display == 'none' || dGet('wtw_selectimagepage').style.display == '') && (dGet('wtw_admincommunitiesdiv').style.display == 'none' || dGet('wtw_admincommunitiesdiv').style.display == '') && (dGet('wtw_adminbuildingsdiv').style.display == 'none' || dGet('wtw_adminbuildingsdiv').style.display == '') && (dGet('wtw_adminthingsdiv').style.display == 'none' || dGet('wtw_adminthingsdiv').style.display == '') && zopen == false) {
+				if ((dGet('wtw_selectimagepage').style.display == 'none' || dGet('wtw_selectimagepage').style.display == '') && !document.getElementById('wtw_admincommunitiesdiv').classList.contains('active') && !document.getElementById('wtw_adminbuildingsdiv').classList.contains('active') && !document.getElementById('wtw_adminthingsdiv').classList.contains('active') && zopen == false) {
+						WTW.openFullPageForm('medialibrary','');WTW.setImageMenu(4);
 				} else {
 					WTW.hide('wtw_selectimagepage');
 					WTW.hide('wtw_showimportpage');
-					WTW.hide('wtw_admincommunitiesdiv');
-					WTW.hide('wtw_adminbuildingsdiv');
-					WTW.hide('wtw_adminthingsdiv');
+					// WTW.hide('wtw_admincommunitiesdiv'); 
+					document.getElementById('wtw_admincommunitiesdiv').classList.remove("active");
+					// WTW.hide('wtw_adminbuildingsdiv');
+					document.getElementById('wtw_adminbuildingsdiv').classList.remove("active");
+					// WTW.hide('wtw_adminthingsdiv');
+					document.getElementById('wtw_adminthingsdiv').classList.remove("active");
 					WTW.closeFullPageForm();
 				}
 				break;
@@ -1074,6 +1098,15 @@ WTWJS.prototype.toggleAdminSubMenu = function(zobj) {
 }
 
 
+/* quick editor setting hide/close */
+WTWJS.prototype.toggleQuickEditorSettings = function() {
+	if (document.getElementById('wtw_quickeditorsettings').classList.contains('hide')) {
+		document.getElementById('wtw_quickeditorsettings').classList.remove('hide');
+	}else{
+		document.getElementById('wtw_quickeditorsettings').classList.add('hide');
+	}
+	
+}
 /* admin menu 'quick edit menu' (bottom left) toggle on/off features */
 
 WTWJS.prototype.setQuickEditorAvatarCamera = function(zvalue) {
@@ -1090,7 +1123,8 @@ WTWJS.prototype.setQuickEditorAvatarCamera = function(zvalue) {
 
 			if (dGet('wtw_bavatarcamera') != null) {
 				var zon = WTW.__('On');
-				dGet('wtw_bavatarcamera').innerHTML = zavatar + '<br />' + zcamera + '<br />' + zon;
+				// dGet('wtw_bavatarcamera').innerHTML = zavatar + '<br />' + zcamera + '<br />' + zon;
+				dGet('wtw_bavatarcamera').innerHTML = '';
 				dGet('wtw_bavatarcamera').onclick = function() { WTW.setQuickEditorAvatarCamera(0); };
 				dGet('wtw_bavatarcamera').className = 'wtw-quickbar';
 				dGet('wtw_bavatarcamera').title = WTW.__('Camera is Attached to Avatar');
@@ -1103,7 +1137,8 @@ WTWJS.prototype.setQuickEditorAvatarCamera = function(zvalue) {
 		
 			if (dGet('wtw_bavatarcamera') != null) {
 				var zoff = WTW.__('Off');
-				dGet('wtw_bavatarcamera').innerHTML = zavatar + '<br />' + zcamera + '<br />' + zoff;
+				// dGet('wtw_bavatarcamera').innerHTML = zavatar + '<br />' + zcamera + '<br />' + zoff;
+				dGet('wtw_bavatarcamera').innerHTML = '';
 				dGet('wtw_bavatarcamera').onclick = function() { WTW.setQuickEditorAvatarCamera(1); };
 				dGet('wtw_bavatarcamera').className = 'wtw-quickbaroff';
 				dGet('wtw_bavatarcamera').title = WTW.__('Camera is Detached from Avatar');
@@ -1123,7 +1158,8 @@ WTWJS.prototype.setQuickEditorFocus = function(zvalue) {
 		if (zvalue == 1) {
 			if (dGet('wtw_bfocus') != null) {
 				var zon = WTW.__('On');
-				dGet('wtw_bfocus').innerHTML = zfocus + '<br /><br />' + zon;
+				// dGet('wtw_bfocus').innerHTML = zfocus + '<br /><br />' + zon;
+				dGet('wtw_bfocus').innerHTML = '';
 				dGet('wtw_bfocus').onclick = function() { WTW.setQuickEditorFocus(0); };
 				dGet('wtw_bfocus').className = 'wtw-quickbar';
 				dGet('wtw_bfocus').title = WTW.__('Focus Highlight is On');
@@ -1134,7 +1170,8 @@ WTWJS.prototype.setQuickEditorFocus = function(zvalue) {
 			/* WTW.resetMoldsOpacity(); */
 			if (dGet('wtw_bfocus') != null) {
 				var zoff = WTW.__('Off');
-				dGet('wtw_bfocus').innerHTML = zfocus + '<br /><br />' + zoff;
+				// dGet('wtw_bfocus').innerHTML = zfocus + '<br /><br />' + zoff;
+				dGet('wtw_bfocus').innerHTML = '';
 				dGet('wtw_bfocus').onclick = function() { WTW.setQuickEditorFocus(1); };
 				dGet('wtw_bfocus').className = 'wtw-quickbaroff';
 				dGet('wtw_bfocus').title = WTW.__('Focus Highlight is Off');
@@ -1155,7 +1192,8 @@ WTWJS.prototype.setQuickEditorMerged = function(zvalue) {
 			WTW.setShowCSG();
 			if (dGet('wtw_bmerged') != null) {
 				var zon = WTW.__('On');
-				dGet('wtw_bmerged').innerHTML = zmerged + '<br /><br />' + zon;
+				// dGet('wtw_bmerged').innerHTML = zmerged + '<br /><br />' + zon;
+				dGet('wtw_bmerged').innerHTML = '';
 				dGet('wtw_bmerged').onclick = function() { WTW.setQuickEditorMerged(0); };
 				dGet('wtw_bmerged').className = 'wtw-quickbar';
 				dGet('wtw_bmerged').title = WTW.__('Merged Shapes are Shown');
@@ -1166,7 +1204,8 @@ WTWJS.prototype.setQuickEditorMerged = function(zvalue) {
 			WTW.setHideCSG();
 			if (dGet('wtw_bmerged') != null) {
 				var zoff = WTW.__('Off');
-				dGet('wtw_bmerged').innerHTML = zmerged + '<br /><br />' + zoff;
+				// dGet('wtw_bmerged').innerHTML = zmerged + '<br /><br />' + zoff;
+				dGet('wtw_bmerged').innerHTML = '';
 				dGet('wtw_bmerged').onclick = function() { WTW.setQuickEditorMerged(1); };
 				dGet('wtw_bmerged').className = 'wtw-quickbaroff';
 				dGet('wtw_bmerged').title = WTW.__('Merged Shapes are Hidden');
@@ -1248,7 +1287,8 @@ WTWJS.prototype.setQuickEditorZones = function(value) {
 			}
 			if (dGet('wtw_bzones') != null) {
 				var zon = WTW.__('On');
-				dGet('wtw_bzones').innerHTML = zzones + '<br /><br />' + zon;
+				// dGet('wtw_bzones').innerHTML = zzones + '<br /><br />' + zon;
+				dGet('wtw_bzones').innerHTML = '';
 				dGet('wtw_bzones').onclick = function() { WTW.setQuickEditorZones(0); };
 				dGet('wtw_bzones').className = 'wtw-quickbar';
 				dGet('wtw_bzones').title = WTW.__('Action Zones are Shown');
@@ -1263,7 +1303,8 @@ WTWJS.prototype.setQuickEditorZones = function(value) {
 			}
 			if (dGet('wtw_bzones') != null) {
 				var zoff = WTW.__('Off');
-				dGet('wtw_bzones').innerHTML = zzones + '<br /><br />' + zoff;
+				// dGet('wtw_bzones').innerHTML = zzones + '<br /><br />' + zoff;
+				dGet('wtw_bzones').innerHTML = '';
 				dGet('wtw_bzones').onclick = function() { WTW.setQuickEditorZones(1); };
 				dGet('wtw_bzones').className = 'wtw-quickbaroff';
 				dGet('wtw_bzones').title = WTW.__('Action Zones are Hidden');
@@ -1285,7 +1326,8 @@ WTWJS.prototype.setQuickEditorLoadAll = function(value) {
 			WTW.loadAllActionZones = 1;
 			if (dGet('wtw_bloadall') != null) {
 				var zon = WTW.__('On');
-				dGet('wtw_bloadall').innerHTML = zload + '<br />' + zall + '<br />' + zon;
+				// dGet('wtw_bloadall').innerHTML = zload + '<br />' + zall + '<br />' + zon;
+				dGet('wtw_bloadall').innerHTML = '';
 				dGet('wtw_bloadall').onclick = function() { WTW.setQuickEditorLoadAll(0); };
 				dGet('wtw_bloadall').className = 'wtw-quickbar';
 				dGet('wtw_bloadall').title = WTW.__('Load All Action Zones');
@@ -1296,7 +1338,8 @@ WTWJS.prototype.setQuickEditorLoadAll = function(value) {
 			WTW.loadAllActionZones = 0;
 			if (dGet('wtw_bloadall') != null) {
 				var zoff = WTW.__('Off');
-				dGet('wtw_bloadall').innerHTML = zload + '<br />' + zall + '<br />' + zoff;
+				// dGet('wtw_bloadall').innerHTML = zload + '<br />' + zall + '<br />' + zoff;
+				dGet('wtw_bloadall').innerHTML = '';
 				dGet('wtw_bloadall').onclick = function() { WTW.setQuickEditorLoadAll(1); };
 				dGet('wtw_bloadall').className = 'wtw-quickbaroff';
 				dGet('wtw_bloadall').title = WTW.__('Load Active Action Zones');
@@ -1347,7 +1390,8 @@ WTWJS.prototype.setQuickEditorLines = function(value) {
 			}
 			if (dGet('wtw_blines') != null) {
 				var zon = WTW.__('On');
-				dGet('wtw_blines').innerHTML = zlines + '<br /><br />' + zon;
+				// dGet('wtw_blines').innerHTML = zlines + '<br /><br />' + zon;
+				dGet('wtw_blines').innerHTML = '';
 				dGet('wtw_blines').onclick = function() { WTW.setQuickEditorLines(0); };
 				dGet('wtw_blines').className = 'wtw-quickbar';
 				dGet('wtw_blines').title = WTW.__('Alignment Lines are Shown');
@@ -1387,7 +1431,8 @@ WTWJS.prototype.setQuickEditorLines = function(value) {
 			}
 			if (dGet('wtw_blines') != null) {
 				var zoff = WTW.__('Off');
-				dGet('wtw_blines').innerHTML = zlines + '<br /><br />' + zoff;
+				// dGet('wtw_blines').innerHTML = zlines + '<br /><br />' + zoff;
+				dGet('wtw_blines').innerHTML = '';
 				dGet('wtw_blines').onclick = function() { WTW.setQuickEditorLines(1); };
 				dGet('wtw_blines').className = 'wtw-quickbaroff';
 				dGet('wtw_blines').title = WTW.__('Alignment Lines are Hidden');
@@ -1883,22 +1928,12 @@ WTWJS.prototype.toggleAdvanced = function(thisdiv, sectiondiv) {
 	/* various admin forms use an 'advanced options' link to show / hide additional settings */
 	try {
 		if (dGet(sectiondiv) != null) {
-			if (thisdiv.innerHTML == '-- Show Advanced Options --') {
-				thisdiv.innerHTML = '-- Hide Advanced Options --';
-				dGet(sectiondiv).style.display = 'block';
-				dGet(sectiondiv).style.visibility = 'visible';
-			} else if (thisdiv.innerHTML == '-- Show Advanced Mixmap Terrain --') {
-				thisdiv.innerHTML = '-- Hide Advanced Mixmap Terrain --';
-				dGet(sectiondiv).style.display = 'block';
-				dGet(sectiondiv).style.visibility = 'visible';
-			} else if (thisdiv.innerHTML == '-- Hide Advanced Mixmap Terrain --') {
-				thisdiv.innerHTML = '-- Show Advanced Mixmap Terrain --';
-				dGet(sectiondiv).style.display = 'none';
-				dGet(sectiondiv).style.visibility = 'hidden';
-			} else {
-				thisdiv.innerHTML = '-- Show Advanced Options --';
-				dGet(sectiondiv).style.display = 'none';
-				dGet(sectiondiv).style.visibility = 'hidden';
+			if (!thisdiv.classList.contains('active')) {
+				thisdiv.classList.add("active");
+				dGet(sectiondiv).classList.add("active");
+			}else{
+				thisdiv.classList.remove("active");
+				dGet(sectiondiv).classList.remove("active");
 			}
 		}
 	} catch (ex) {
@@ -2147,3 +2182,5 @@ WTWJS.prototype.updateBadges = async function() {
 		WTW.log('core-scripts-admin-wtw_adminmenus.js-updateBadges=' + ex.message);
 	}
 }
+
+// updated all switches, innerhtml is no longer beign updated in any switch. i.e. lines show

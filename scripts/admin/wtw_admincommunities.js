@@ -411,14 +411,18 @@ WTWJS.prototype.setCommunitiesListTab = async function(zfilter) {
 		}
 		if (zfilter == 'all' && WTW.isUserInRole('admin')) {
 			if (dGet('wtw_communitybuttonmine') != null) {
-				dGet('wtw_communitybuttonmine').className = 'wtw-localbutton wtw-leftradius';
-				dGet('wtw_communitybuttonall').className = 'wtw-localbuttonselected wtw-rightradius';
+				// dGet('wtw_communitybuttonmine').className = 'wtw-localbutton wtw-leftradius';
+				// dGet('wtw_communitybuttonall').className = 'wtw-localbuttonselected wtw-rightradius';
+				dGet('wtw_communitybuttonmine').className = 'tab-button';
+				dGet('wtw_communitybuttonall').className = 'tab-button active';
 			}
 		} else {
 			zfilter = 'mine';
 			if (dGet('wtw_communitybuttonmine') != null) {
-				dGet('wtw_communitybuttonmine').className = 'wtw-localbuttonselected wtw-leftradius';
-				dGet('wtw_communitybuttonall').className = 'wtw-localbutton wtw-rightradius';
+				// dGet('wtw_communitybuttonmine').className = 'wtw-localbuttonselected wtw-leftradius';
+				// dGet('wtw_communitybuttonall').className = 'wtw-localbutton wtw-rightradius';
+				dGet('wtw_communitybuttonmine').className = 'tab-button active';
+				dGet('wtw_communitybuttonall').className = 'tab-button';
 			}
 		}
 		WTW.getSelectCommunitiesList(zfilter);
@@ -437,15 +441,18 @@ WTWJS.prototype.getSelectCommunitiesList = async function(zfilter) {
 		WTW.show('wtw_loadingcommunityid');
 		var zlistcommunities = '';
 		if (WTW.isUserInRole('admin') || WTW.isUserInRole('developer') || WTW.isUserInRole('architect') || WTW.isUserInRole('graphic artist')) {
-			zlistcommunities = "<div class='wtw-localbuttonleftpad'></div><div id='wtw_communitybuttonmine' class='wtw-localbutton";
+			// zlistcommunities = "<div class='wtw-localbuttonleftpad'></div><div id='wtw_communitybuttonmine' class='wtw-localbutton";
+			zlistcommunities = "<div class='tab-buttons'><div id='wtw_communitybuttonmine' class='tab-button ";
 			if (zfilter == 'mine') {
-				zlistcommunities += "selected";
+				zlistcommunities += "active";
 			}
-			zlistcommunities += " wtw-leftradius' onclick=\"WTW.setCommunitiesListTab('mine');\">Mine</div><div class='wtw-localbuttonmiddlepad'> or </div><div id='wtw_communitybuttonall' class='wtw-localbutton";
+			// zlistcommunities += " wtw-leftradius' onclick=\"WTW.setCommunitiesListTab('mine');\">Mine</div><div class='wtw-localbuttonmiddlepad'> or </div><div id='wtw_communitybuttonall' class='wtw-localbutton";
+			zlistcommunities += " ' onclick=\"WTW.setCommunitiesListTab('mine');\">Mine</div><div id='wtw_communitybuttonall' class='tab-button ";
 			if (zfilter == 'all') {
-				zlistcommunities += "selected";
+				zlistcommunities += "active";
 			}
-			zlistcommunities += " wtw-rightradius' onclick=\"WTW.setCommunitiesListTab('all');\">All</div><div class='wtw-localbuttonrightpad'></div><div class='wtw-clear'></div>\r\n";
+			// zlistcommunities += " wtw-rightradius' onclick=\"WTW.setCommunitiesListTab('all');\">All</div><div class='wtw-localbuttonrightpad'></div><div class='wtw-clear'></div>\r\n";
+			zlistcommunities += " ' onclick=\"WTW.setCommunitiesListTab('all');\">All</div></div>";
 		} else {
 			zlistcommunities = '<br /><br />';
 		}
@@ -474,9 +481,9 @@ WTWJS.prototype.getSelectCommunitiesList = async function(zfilter) {
 									}
 								}
 								if (WTW.communities[i].communityinfo.communityid == communityid) {
-									dGet('wtw_listcommunities').innerHTML += "<div id='wtw_beditweb-" + WTW.communities[i].communityinfo.communityid + "' class='wtw-menulevel2' style='background-color:#2C2CAB;'><div style='float:right;color:#afafaf;'>" + zversion + "</div>" + WTW.decode(WTW.communities[i].communityinfo.communityname) + "</div>\r\n";
+									dGet('wtw_listcommunities').innerHTML += "<div id='wtw_beditweb-" + WTW.communities[i].communityinfo.communityid + "' class='wtw-menulevel2' > <p>" + WTW.decode(WTW.communities[i].communityinfo.communityname) + "</p> <span>" + zversion + "</span></div>\r\n";
 								} else {
-									dGet('wtw_listcommunities').innerHTML += "<div id='wtw_beditweb-" + WTW.communities[i].communityinfo.communityid + "' onclick=\"window.location.href='admin.php?communityid=" + WTW.communities[i].communityinfo.communityid + "';\" class='wtw-menulevel2'><div style='float:right;color:#afafaf;'>" + zversion + "</div>" + WTW.decode(WTW.communities[i].communityinfo.communityname) + "</div>\r\n";
+									dGet('wtw_listcommunities').innerHTML += "<div id='wtw_beditweb-" + WTW.communities[i].communityinfo.communityid + "' onclick=\"window.location.href='admin.php?communityid=" + WTW.communities[i].communityinfo.communityid + "';\" class='wtw-menulevel2'> <p>" + WTW.decode(WTW.communities[i].communityinfo.communityname) + "</p> <span>" + zversion + "</span></div>\r\n";
 								}
 							}
 						}

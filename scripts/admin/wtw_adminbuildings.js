@@ -279,14 +279,18 @@ WTWJS.prototype.setBuildingsListTab = async function(zfilter) {
 		}
 		if (zfilter == 'all' && WTW.isUserInRole('admin')) {
 			if (dGet('wtw_buildingbuttonmine') != null) {
-				dGet('wtw_buildingbuttonmine').className = 'wtw-localbutton wtw-leftradius';
-				dGet('wtw_buildingbuttonall').className = 'wtw-localbuttonselected wtw-rightradius';
+				// dGet('wtw_buildingbuttonmine').className = 'wtw-localbutton wtw-leftradius';
+				// dGet('wtw_buildingbuttonall').className = 'wtw-localbuttonselected wtw-rightradius';
+				dGet('wtw_buildingbuttonmine').className = 'tab-button';
+				dGet('wtw_buildingbuttonall').className = 'tab-button active';
 			}
 		} else {
 			zfilter = 'mine';
 			if (dGet('wtw_buildingbuttonmine') != null) {
-				dGet('wtw_buildingbuttonmine').className = 'wtw-localbuttonselected wtw-leftradius';
-				dGet('wtw_buildingbuttonall').className = 'wtw-localbutton wtw-rightradius';
+				// dGet('wtw_buildingbuttonmine').className = 'wtw-localbuttonselected wtw-leftradius';
+				// dGet('wtw_buildingbuttonall').className = 'wtw-localbutton wtw-rightradius';
+				dGet('wtw_buildingbuttonmine').className = 'tab-button active';
+				dGet('wtw_buildingbuttonall').className = 'tab-button';
 			}
 		}
 		WTW.getSelectBuildingsList(zfilter);
@@ -305,15 +309,20 @@ WTWJS.prototype.getSelectBuildingsList = async function(zfilter) {
 		WTW.show('wtw_loadingbuildingid');
 		var zlistbuildings = '';
 		if (WTW.isUserInRole('admin') || WTW.isUserInRole('developer') || WTW.isUserInRole('architect') || WTW.isUserInRole('graphic artist')) {
-			zlistbuildings = "<div class='wtw-localbuttonleftpad'></div><div id='wtw_buildingbuttonmine' class='wtw-localbutton";
+			// zlistbuildings = "<div class='wtw-localbuttonleftpad'></div><div id='wtw_buildingbuttonmine' class='wtw-localbutton";
+			zlistbuildings = "<div class='tab-buttons'><div id='wtw_buildingbuttonmine' class='tab-button ";
 			if (zfilter == 'mine') {
-				zlistbuildings += "selected";
+				// zlistbuildings += "selected";
+				zlistbuildings += "active";
 			}
-			zlistbuildings += " wtw-leftradius' onclick=\"WTW.setBuildingsListTab('mine');\">Mine</div><div class='wtw-localbuttonmiddlepad'> or </div><div id='wtw_buildingbuttonall' class='wtw-localbutton";
+			// zlistbuildings += " wtw-leftradius' onclick=\"WTW.setBuildingsListTab('mine');\">Mine</div><div class='wtw-localbuttonmiddlepad'> or </div><div id='wtw_buildingbuttonall' class='wtw-localbutton";
+			zlistbuildings += " ' onclick=\"WTW.setBuildingsListTab('mine');\">Mine</div><div id='wtw_buildingbuttonall' class='tab-button ";
 			if (zfilter == 'all') {
-				zlistbuildings += "selected";
+				// zlistbuildings += "selected";
+				zlistbuildings += "active";
 			}
-			zlistbuildings += " wtw-rightradius' onclick=\"WTW.setBuildingsListTab('all');\">All</div><div class='wtw-localbuttonrightpad'></div><div class='wtw-clear'></div>\r\n";
+			// zlistbuildings += " wtw-rightradius' onclick=\"WTW.setBuildingsListTab('all');\">All</div><div class='wtw-localbuttonrightpad'></div><div class='wtw-clear'></div>\r\n";
+			zlistbuildings += " ' onclick=\"WTW.setBuildingsListTab('all');\">All</div></div>";
 		} else {
 			zlistbuildings = '<br /><br />';
 		}
@@ -342,9 +351,9 @@ WTWJS.prototype.getSelectBuildingsList = async function(zfilter) {
 									}
 								}
 								if (WTW.buildings[i].buildinginfo.buildingid == buildingid) {
-									dGet('wtw_listbuildings').innerHTML += "<div id='wtw_beditweb-" + WTW.buildings[i].buildinginfo.buildingid + "' class='wtw-menulevel2' style='background-color:#2C2CAB;'><div style='float:right;color:#afafaf;'>" + zversion + "</div>" + WTW.decode(WTW.buildings[i].buildinginfo.buildingname) + "</div>\r\n";
+									dGet('wtw_listbuildings').innerHTML += "<div id='wtw_beditweb-" + WTW.buildings[i].buildinginfo.buildingid + "' class='wtw-menulevel2' > <p>" + WTW.decode(WTW.buildings[i].buildinginfo.buildingname) + "</p> <span>" + zversion + "</span> </div>\r\n";
 								} else {
-									dGet('wtw_listbuildings').innerHTML += "<div id='wtw_beditweb-" + WTW.buildings[i].buildinginfo.buildingid + "' onclick=\"window.location.href='admin.php?buildingid=" + WTW.buildings[i].buildinginfo.buildingid + "';\" class='wtw-menulevel2'><div style='float:right;color:#afafaf;'>" + zversion + "</div>" + WTW.decode(WTW.buildings[i].buildinginfo.buildingname) + "</div>\r\n";
+									dGet('wtw_listbuildings').innerHTML += "<div id='wtw_beditweb-" + WTW.buildings[i].buildinginfo.buildingid + "' onclick=\"window.location.href='admin.php?buildingid=" + WTW.buildings[i].buildinginfo.buildingid + "';\" class='wtw-menulevel2'><p>" + WTW.decode(WTW.buildings[i].buildinginfo.buildingname) + "</p><span>" + zversion + "</span></div>\r\n";
 								}
 							}
 						}
@@ -379,7 +388,7 @@ WTWJS.prototype.getAddBuildingList = async function() {
 				if (WTW.buildings != null) {
 					for (var i = 0; i < WTW.buildings.length; i++) {
 						if (WTW.buildings[i] != null) {
-							dGet('wtw_buildingbuttonlist').innerHTML += "<div id='wtw_baddbbuildingmold" + WTW.buildings[i].buildinginfo.buildingid + "' onclick=\"WTW.addConnectingGrid('building', '" + WTW.buildings[i].buildinginfo.buildingid + "', '" + WTW.buildings[i].buildinginfo.buildingname + "');\" class='wtw-menulevel2'>" + WTW.buildings[i].buildinginfo.buildingname + "</div>\r\n";
+							dGet('wtw_buildingbuttonlist').innerHTML += "<div id='wtw_baddbbuildingmold" + WTW.buildings[i].buildinginfo.buildingid + "' onclick=\"WTW.addConnectingGrid('building', '" + WTW.buildings[i].buildinginfo.buildingid + "', '" + WTW.buildings[i].buildinginfo.buildingname + "');\" class='wtw-menulevel2'><p>" + WTW.buildings[i].buildinginfo.buildingname + "</p></div>\r\n";
 						}
 					}
 				}
