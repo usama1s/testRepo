@@ -374,6 +374,7 @@ WTWJS.prototype.setActionZoneFormFields = function(zactionzonetype) {
 				dGet('wtw_tcopyaxletoactionzone').disabled = true;
 				dGet('wtw_actionzoneadvancedoptslink').innerHTML = '-- Hide Advanced Options --';
 				WTW.show('wtw_actionzoneadvancedopts');
+				document.getElementById('wtw_actionzoneadvancedopts').classList.add('active');
 				WTW.show('wtw_azjavascriptdiv');
 				break;
 			case 'unloadzone':

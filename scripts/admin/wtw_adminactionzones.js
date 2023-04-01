@@ -70,6 +70,7 @@ WTWJS.prototype.showActionZone = function(zactionzoneind) {
 				zactionzone.edgesWidth = 4.0;
 				zactionzone.edgesColor = new BABYLON.Color4(0, 0, 1, 1);
 			}
+	
 			if (zactionzoneaxle != null) {
 				zactionzoneaxle.isVisible = true;
 			}
